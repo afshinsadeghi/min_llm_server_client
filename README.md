@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 ### Configuration
 
-The configuration settings, such as the model path and device settings, can be found in `src/setting.py`. Make sure to update these settings according to your environment.
+The configuration settings, such as the model path and device settings, can be found in `setting` parameter of server. Make sure to update these settings according to your environment.
 
 
 ### Starting the Server
@@ -39,11 +39,16 @@ To start the LLM inference server, run the following command:
 
 
 ### To run:
-- set the parameters in setting.py
 
 ```
  python -m min_llm_server_client.src.local_llm_inference_server_api
 ```
+You can set the arguments such as:  
+-  --model_name  
+- --max_new_tokens  
+- --device  
+
+ device could be cpu or 0 or 1 or any other number meaning the core gpu number to use
 
 ##### Usage on browser:
 

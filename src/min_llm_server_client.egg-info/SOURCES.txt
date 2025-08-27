@@ -1,6 +1,13 @@
 LICENSE-2.0.txt
 README.md
+requirements.txt
 setup.py
+src/__init__.py
+src/local_llm_inference_api_client.py
+src/local_llm_inference_server_api.py
+src/__pycache__/__init__.cpython-310.pyc
+src/__pycache__/local_llm_inference_server_api.cpython-310.pyc
+src/__pycache__/setting.cpython-310.pyc
 src/min_llm_server_client.egg-info/PKG-INFO
 src/min_llm_server_client.egg-info/SOURCES.txt
 src/min_llm_server_client.egg-info/dependency_links.txt
