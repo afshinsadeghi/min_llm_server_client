@@ -50,11 +50,13 @@ You can set the arguments such as:
 
 For example:  
 ```
-python -m min_llm_server_client.src.local_llm_inference_server_api --model_name= openai/gpt-oss-120b --max_new_tokens =100 --device
+python -m min_llm_server_client.src.local_llm_inference_server_api --model_name= openai/gpt-oss-120b --max_new_tokens = 100 --device 0
 ```
+device could be cpu or 0 or 1 or any other number meaning the core gpu number to use
 
-
- device could be cpu or 0 or 1 or any other number meaning the core gpu number to use
+running on cpu:
+```python -m min_llm_server_client.src.local_llm_inference_server_api --model_name= openai/gpt-oss-120b --max_new_tokens = 100 --device cpu
+```
 
 ##### Usage on browser:
 
