@@ -38,10 +38,9 @@ def read_question():
 
 if __name__ == '__main__':
     
-    setting = dict
+    from types import SimpleNamespace
+    setting = SimpleNamespace()
     setting.llm_path =  "" # set the path to a downloaded model or locally trained model for example "/data/llama-3.3-70b-instruct"
-
-
 
     setting.model_name = "openai/gpt-oss-120b"  # the default model name on HuggingFace, in case you want to download it.
 
@@ -58,7 +57,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser("input model name in HuggingFace or path to a local model")
     parser.add_argument("--model_name", default="", help="model name or path to the model", type=str)
     parser.add_argument("--max_new_tokens", default=500, help="max_new_tokens parameters for llms", type=int)
-    parser.add_argument("--device", default="cuda:0", help="device", type=int)
+    parser.add_argument("--device", default="0", help="device could be cpu or 0 1 etc as cudo core number", type=str)
 
     args = parser.parse_args()
 
