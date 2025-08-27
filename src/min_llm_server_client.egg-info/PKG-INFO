@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: min_llm_server_client
+Version: 0.1.0
+Summary: A minimal REST API server and client for local LLM inference.
+Author: Afshin Sadeghi
+Author-email: afshin.sadeghi@example.com
+Requires-Python: >=3.6
+License-File: LICENSE-2.0.txt
+Requires-Dist: flask
+Requires-Dist: transformers
+Requires-Dist: sentencepiece
+Dynamic: author
+Dynamic: author-email
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
