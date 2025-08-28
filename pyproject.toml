@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "min-llm-server-client"
+version = "0.1.0"
+description = "A minimal Flask API server for local HuggingFace LLMs"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "Apache-2.0"
+authors = [
+    { name = "Afshin Sadeghi", email = "sadeghi.afshin@gmail.com" }
+]
+dependencies = [
+    "transformers>=4.40.0",
+    "accelerate>=0.28.0",
+    "torch",        # leave unpinned so user installs CUDA/CPU build
+    "flask",
+    "sentencepiece",
+    "pynvml"
+]
+
+[project.scripts]
+min-llm-server = "local_llm_inference_server_api:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

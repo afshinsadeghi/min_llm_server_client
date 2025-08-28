@@ -9,7 +9,6 @@ import json
 import torch
 import pynvml
 
-
 class ModelRunner():
     def __init__(self, setting):
         self.device = setting.device
@@ -119,28 +118,26 @@ def read_question():
         result = "user key is unknown"
     return jsonify(message="Success", statusCode=200, query=question, answer=result), 200
 
-if __name__ == '__main__':
+def main():
     from types import SimpleNamespace
+    import argparse
+
     setting = SimpleNamespace()
-
-    setting.llm_path = ""  # e.g. "/data/llama-3.3-70b-instruct" or HF id
-    setting.model_name = "meta-llama/Llama-3.3-70B-Instruct"
-    setting.max_new_tokens = 50
-
-    parser = argparse.ArgumentParser("input model name in HuggingFace or path to a local model")
-    parser.add_argument("--model_name", default="", type=str, help="model name or local path")
+    parser = argparse.ArgumentParser("Minimal LLM Server")
+    parser.add_argument("--model_name", default="openai/gpt-oss-20b", help="default is you can use other models such as meta-llama/Llama-3.3-70B-Instruct", type=str)
     parser.add_argument("--max_new_tokens", default=500, type=int)
-    parser.add_argument("--device", default="", type=str, help="cpu or cuda:0, cuda:1 or when multiple gpu cores: auto")
+    parser.add_argument("--device", default="", type=str, help="cpu | auto | cuda:0 etc.")
     args = parser.parse_args()
 
-    setting.llm_path = args.model_name or setting.model_name
+    setting.llm_path = args.model_name
     setting.max_new_tokens = args.max_new_tokens
-    if args.device != "":
-        setting.device = args.device 
+    setting.device = args.device
 
-    # Ensure multiple GPUs are visible before import/initialization
-    # Example (run in shell): export CUDA_VISIBLE_DEVICES=0,1,2,3
-
+    global llm_runner
     llm_runner = ModelRunner(setting)
+
     print("Starting the server with model:", setting.llm_path)
-    app.run(debug=False)
+    app.run(host="127.0.0.1", port=5000, debug=False)
+
+if __name__ == "__main__":
+    main()
