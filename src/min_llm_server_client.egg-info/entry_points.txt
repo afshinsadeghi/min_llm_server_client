@@ -1,2 +1,2 @@
 [console_scripts]
-min-llm-server = local_llm_inference_server_api:main
+min-llm-server = min_llm_server_client.api_server:main

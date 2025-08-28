@@ -1,5 +1,12 @@
-Flask
-transformers
-sentencepiece
-accelerate
-pynvml
+# Core LLM stack
+torch>=2.2.0
+transformers>=4.40.0
+accelerate>=0.28.0
+sentencepiece>=0.1.99
+flask>=2.2
+pynvml>=11.5.0
+
+# Scientific stack pinned for stability (avoids NumPy 2.x conflicts)
+numpy<1.25
+scipy<1.11
+scikit-learn<1.3
