@@ -144,7 +144,7 @@ def main():
     global llm_runner
     llm_runner = ModelRunner(setting)
     global stop_criteria
-    stop_criteria = StoppingCriteriaList([StopOnTokens([tokenizer.eos_token_id])])
+    stop_criteria = StoppingCriteriaList([StopOnTokens([llm_runner.tokenizer.eos_token_id])])
 
 
     print("Starting the server with model:", setting.llm_path)
