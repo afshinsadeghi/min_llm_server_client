@@ -1,6 +1,7 @@
 LICENSE-2.0.txt
 README.md
 pyproject.toml
+setup.py
 src/min_llm_server_client/__init__.py
 src/min_llm_server_client/api_server.py
 src/min_llm_server_client.egg-info/PKG-INFO
