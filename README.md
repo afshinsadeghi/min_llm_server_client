@@ -4,9 +4,7 @@ The simplest possible Python code for running local LLM inference as a REST API 
 
 This package lets you start an inference server for Hugging Face–compatible models (like LLaMA, Qwen, GPT-OSS, etc.) on your own computer or server, and make it accessible to applications via HTTP.
 
-Tutorial:
-
-[Tutorial](https://medium.com/@sadeghi.afshin/run-gpt-oss-20b-and-gpt-oss-120b-locally-with-a-minimal-api-server-in-the-style-of-openai-1872e68a93b7)
+See the [Tutorial](https://medium.com/@sadeghi.afshin/run-gpt-oss-20b-and-gpt-oss-120b-locally-with-a-minimal-api-server-in-the-style-of-openai-1872e68a93b7) page for extented info.
 ---
 
 ## Installation
