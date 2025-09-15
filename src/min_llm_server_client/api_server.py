@@ -3,11 +3,18 @@ import os
 import sentencepiece as spm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers import GenerationConfig, TextStreamer
+from transformers import StoppingCriteria, StoppingCriteriaList
 from flask import Flask, request, jsonify
 import argparse
 import json
 import torch
 import pynvml
+
+class StopOnTokens(StoppingCriteria):
+    def __init__(self, stop_ids):
+        self.stop_ids = stop_ids
+    def __call__(self, input_ids, scores, **kwargs):
+        return input_ids[0, -1].item() in self.stop_ids
 
 class ModelRunner():
     def __init__(self, setting):
@@ -94,6 +101,7 @@ class ModelRunner():
                 do_sample=False, #True,
                 num_beams=1,
                 max_new_tokens=self.max_new_tokens,
+                stopping_criteria = stop_criteria,
                 eos_token_id=self.tokenizer.eos_token_id,
                 pad_token_id=self.tokenizer.pad_token_id,
             )
@@ -135,6 +143,9 @@ def main():
 
     global llm_runner
     llm_runner = ModelRunner(setting)
+    global stop_criteria
+    stop_criteria = StoppingCriteriaList([StopOnTokens([tokenizer.eos_token_id])])
+
 
     print("Starting the server with model:", setting.llm_path)
     app.run(host="127.0.0.1", port=5000, debug=False)
