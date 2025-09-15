@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='min_llm_server_client',
-    version='0.3.7.1',
+    version='0.3.8',
     author='Afshin Sadeghi',
     author_email='afshin.sadeghi@example.com',
     description='A minimal API server and client for local LLM inference.',

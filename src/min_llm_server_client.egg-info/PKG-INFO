@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: min-llm-server-client
-Version: 0.3.7.1
+Version: 0.3.8
 Summary: A minimal Flask API server for local HuggingFace LLMs
 Author: Afshin Sadeghi
 Author-email: Afshin Sadeghi <sadeghi.afshin@gmail.com>
