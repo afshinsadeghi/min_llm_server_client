@@ -97,8 +97,10 @@ class ModelRunner():
         )
         with torch.no_grad():
             generated_ids = self.model.generate(
-                **inputs,                    # leave on CPU; HF routes to shards
-                do_sample=False, #True,
+                **inputs,                    
+                do_sample=True,             # enable sampling instead of greedy decoding
+                top_p=0.9,                  # nucleus sampling: sample from top 90% probability mass
+                temperature=0.8,            # smooths probabilities (lower=more deterministic)
                 num_beams=1,
                 max_new_tokens=self.max_new_tokens,
                 stopping_criteria = stop_criteria,
