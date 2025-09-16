@@ -56,16 +56,6 @@ class ModelRunner():
                 # Diagnostics
             print("CUDA_VISIBLE_DEVICES:", os.environ.get("CUDA_VISIBLE_DEVICES", "<not set>"))
             print("torch.cuda.device_count():", torch.cuda.device_count())
-
-            #if torch.cuda.device_count() > 1:
-            #    print("Multiple GPUs detected; setting device_map='auto'")
-            #    #device_map_ = "auto"
-            #    #os.environ["CUDA_VISIBLE_DEVICES"] = ",".join(str(i) for i in range(torch.cuda.device_count()))
-            #    print("Set CUDA_VISIBLE_DEVICES:", os.environ["CUDA_VISIBLE_DEVICES"])
-
-        #    device_map=_ "auto"
-        #    else: 
-
             
         self.model = AutoModelForCausalLM.from_pretrained(
             setting.llm_path,
@@ -111,7 +101,7 @@ class ModelRunner():
             stop_tokens.append(self.tokenizer.sep_token_id)
             
         # Add common ending tokens if they exist in the tokenizer's vocabulary
-        for end_text in ["</s>", "<|endoftext|>", "<|im_end|>"]:
+        for end_text in ["</s>", "<|endoftext|>", "<|im_end|>", ". \n\n"]:
             try:
                 token_id = self.tokenizer.convert_tokens_to_ids(end_text)
                 if token_id != self.tokenizer.unk_token_id:  # Make sure it's not unknown
@@ -132,8 +122,8 @@ class ModelRunner():
                 do_sample=True,             # enable sampling instead of greedy decoding
                 top_p=0.9,                  # nucleus sampling: sample from top 90% probability mass
                 temperature=0.1,            # smooths probabilities (lower=more deterministic)
-                repetition_penalty=1.2,     # smooths probabilities (lower=more deterministic)
-                num_beams=1,
+                repetition_penalty=1.2,     
+                num_beams=2,
                 max_new_tokens=self.max_new_tokens,
                 stopping_criteria=stopping_criteria,
                 eos_token_id=self.tokenizer.eos_token_id,
@@ -167,14 +157,6 @@ def read_question():
     if key == "key1":
         result = llm_runner.run_query(question)
         
-        # If the result is too long and the user asked for a shorter response,
-        # we can truncate it at a sensible point (e.g., end of a sentence)
-        if any(indicator.lower() in question.lower() for indicator in shorter_response_indicators):
-            # Find a good stopping point (end of sentence)
-            for i in range(min(200, len(result)), 0, -1):
-                if i < len(result) and result[i-1] in ['.', '!', '?'] and (i == len(result) or result[i] == ' ' or result[i] == '\n'):
-                    result = result[:i]
-                    break
     else:
         result = "user key is unknown"
         
@@ -187,10 +169,12 @@ def main():
     setting = SimpleNamespace()
     parser = argparse.ArgumentParser("Minimal LLM Server")
     parser.add_argument("--model_name", default="openai/gpt-oss-20b", help="default is openai/gpt-oss-20b you can use other models such as meta-llama/Llama-3.3-70B-Instruct", type=str)
+    parser.add_argument("--key", default="key1", type=str, help="a simple API key to access the server")
     parser.add_argument("--max_new_tokens", default=500, type=int)
     parser.add_argument("--device", default="", type=str, help="cpu | auto | cuda:0 etc.")
     args = parser.parse_args()
-
+    
+    setting.key = args.key
     setting.llm_path = args.model_name
     setting.max_new_tokens = args.max_new_tokens
     setting.device = args.device
@@ -198,7 +182,6 @@ def main():
     global llm_runner
     llm_runner = ModelRunner(setting)
     # Removed global stop_criteria as it's now created dynamically in run_query
-
 
     print("Starting the server with model:", setting.llm_path)
     app.run(host="127.0.0.1", port=5000, debug=False)
