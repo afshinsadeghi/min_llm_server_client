@@ -10,9 +10,9 @@ This package lets you start an inference server for Hugging Face–compatible mo
 See the [Tutorial](https://medium.com/@sadeghi.afshin/run-gpt-oss-20b-and-gpt-oss-120b-locally-with-a-minimal-api-server-in-the-style-of-openai-1872e68a93b7) page for extented info.
 ---
 
-## Installation
+## Installation by pip ![Pepy Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client)
 
-From PyPI  ![Pepy Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client) (recommended):
+From PyPI  (recommended):
 
 ```bash
 pip install min-llm-server-client
