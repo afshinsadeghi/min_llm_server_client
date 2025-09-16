@@ -1,7 +1,7 @@
 
 
 
-# Minimal LLM Server, for API calls   ![Pepy Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client)
+# Minimal LLM Server, for API calls  
 
 The simplest possible Python code for running local LLM inference as a REST API server (with a simple client).
 
@@ -12,7 +12,7 @@ See the [Tutorial](https://medium.com/@sadeghi.afshin/run-gpt-oss-20b-and-gpt-os
 
 ## Installation
 
-From PyPI (recommended):
+From PyPI  ![Pepy Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client) (recommended):
 
 ```bash
 pip install min-llm-server-client
