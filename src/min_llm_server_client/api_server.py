@@ -171,7 +171,7 @@ def main():
     parser.add_argument("--model_name", default="openai/gpt-oss-20b", help="default is openai/gpt-oss-20b you can use other models such as meta-llama/Llama-3.3-70B-Instruct", type=str)
     parser.add_argument("--key", default="key1", type=str, help="a simple API key to access the server")
     parser.add_argument("--max_new_tokens", default=500, type=int)
-    parser.add_argument("--device", default="", type=str, help="cpu | auto | cuda:0 etc.")
+    parser.add_argument("--device", default="auto", type=str, help="cpu | auto | cuda:0 etc.")
     args = parser.parse_args()
     
     setting.key = args.key
