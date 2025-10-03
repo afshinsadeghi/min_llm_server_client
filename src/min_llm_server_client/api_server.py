@@ -168,7 +168,7 @@ class ModelRunner():
                 min_length=0,               # Allow stopping at any point
                 forced_eos_token_id=self.tokenizer.eos_token_id,  # Force EOS at the end if max_new_tokens is reached
             )
-        input_length = inputs.input_ids.shape[1]
+        input_length = inputs["input_ids"].shape[1]
         result = self.tokenizer.batch_decode(
             generated_ids[:, input_length:],
             skip_special_tokens=True
