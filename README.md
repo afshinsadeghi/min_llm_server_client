@@ -53,8 +53,11 @@ Options:
 - `--max_new_tokens` : maximum number of tokens to generate in response.
 - `--device` : `auto`, `cpu`, `cuda:0`, `cuda:1`, etc. if device is not given or is auto, it finds available GPU core and uses them and if not available it uses CPU instead. 
 
-Example (CPU run):
-
+Example run: 
+```bash
+min-llm-server 
+```
+To force it to run on CPU:  
 ```bash
 min-llm-server --model_name openai/gpt-oss-20b --max_new_tokens 50 --device cpu
 ```
