@@ -1,4 +1,17 @@
 # filepath: /llm_server_client/src/local_llm_inference_server_api.py
+"""
+Minimal LLM Server API
+
+This server provides a simple API for running inference with large language models.
+It supports both single-GPU and multi-GPU (sharded) model configurations.
+
+Important implementation notes:
+- The server automatically detects available GPUs and configures the model accordingly
+- For sharded models (device_map="auto"), inputs are moved to the same device as the first layer
+- Device mismatch warnings are avoided by ensuring inputs and model are on the same device
+- Detailed logging helps track where tensors are placed during inference
+"""
+
 import os
 import sentencepiece as spm
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -91,6 +104,29 @@ class ModelRunner():
             padding=True,
             return_tensors="pt"
         )
+        
+        # Move input tensors to the same device as the model
+        # For sharded models, we need to check where the first layer is
+        print("Original input device:", inputs["input_ids"].device)
+        
+        if hasattr(self.model, "hf_device_map") and self.model.hf_device_map:
+            # Get the device of the first layer of the model
+            first_device = next(iter(self.model.hf_device_map.values()))
+            print(f"Model is sharded. Moving inputs to first device: {first_device}")
+            # Move inputs to that device
+            inputs = {k: v.to(first_device) for k, v in inputs.items()}
+        elif hasattr(self.model, "device") and "cuda" in str(self.model.device):
+            # If model is on a single CUDA device
+            print(f"Model is on a single device: {self.model.device}")
+            inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
+        elif torch.cuda.is_available():
+            # Fallback to cuda:0 if available
+            print("Using fallback to cuda:0")
+            inputs = {k: v.to("cuda:0") for k, v in inputs.items()}
+        else:
+            print("No CUDA device available, keeping inputs on CPU")
+            
+        print("Final input device:", inputs["input_ids"].device)
         
         # Create a local stopping criteria for this query
         # Include common stop tokens and the model's EOS token
