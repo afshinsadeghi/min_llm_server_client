@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "min-llm-server-client"
-version = "0.3.9"  # bump each release
-description = "A minimal Flask API server for local HuggingFace LLMs"
+version = "0.3.10"  # bump each release
+description = "A minimal API server for local HuggingFace LLMs"
 readme = "README.md"
 requires-python = ">=3.6"
 license = "Apache-2.0"

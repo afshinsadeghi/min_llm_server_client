@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
 Name: min-llm-server-client
-Version: 0.3.8
-Summary: A minimal Flask API server for local HuggingFace LLMs
+Version: 0.3.10
+Summary: A minimal API server for local HuggingFace LLMs
 Author: Afshin Sadeghi
 Author-email: Afshin Sadeghi <sadeghi.afshin@gmail.com>
 License-Expression: Apache-2.0
@@ -18,7 +18,10 @@ Dynamic: author
 Dynamic: license-file
 Dynamic: requires-python
 
-# LLM REST API
+
+
+
+# Minimal LLM Server, for API calls  
 
 The simplest possible Python code for running local LLM inference as a REST API server (with a simple client).
 
@@ -27,9 +30,9 @@ This package lets you start an inference server for Hugging Face–compatible mo
 See the [Tutorial](https://medium.com/@sadeghi.afshin/run-gpt-oss-20b-and-gpt-oss-120b-locally-with-a-minimal-api-server-in-the-style-of-openai-1872e68a93b7) page for extented info.
 ---
 
-## Installation
+## Installation by pip ![Pepy Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client)
 
-From PyPI (recommended):
+From PyPI  (recommended):
 
 ```bash
 pip install min-llm-server-client
@@ -56,9 +59,19 @@ min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 1
 ```
 
 Options:
-- `--model_name` : Hugging Face model name or local path (e.g. `openai/gpt-oss-20b`, `openai/gpt-oss-120b`, `meta-llama/Llama-3.3-70B-Instruct`, or local model `/path/to/model`).
+- `--model_name` : Hugging Face model name or local path
+   suggested models:
+    `openai/gpt-oss-20b`
+    `openai/gpt-oss-120b`
+    `meta-llama/Llama-3.3-70B-Instruct`
+    `meta-llama/Llama-3.1-8B`
+    `Qwen/Qwen3-0.6B`
+    `Qwen/Qwen2-VL-72B-Instruct-AWQ`
+    `deepseek-ai/DeepSeek-R1-Distill-Qwen-32B`
+  
+    or it can be local model with `/path/to/model`
 - `--max_new_tokens` : maximum number of tokens to generate in response.
-- `--device` : `cpu`, `cuda:0`, `cuda:1`, etc.
+- `--device` : `cpu`, `cuda:0`, `cuda:1`, etc. if device is not given it finds available GPU core and uses them and if not available it uses CPU instead. 
 
 Example (CPU run):
 
