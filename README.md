@@ -94,9 +94,9 @@ print(response)
 - Running **LLaMA 3.1 8B**:
   - Intel CPU → ~30 seconds per request, ~2.4 GB RAM
   - A100 GPU → <1 second per request, ~34 GB GPU memory, ~4.8 GB CPU RAM
-  - 
+    
 - Running **Llama-3.3-70B-Instruct**:
-  -  Intel CPU → ~120 seconds per request
+  - Intel CPU → ~120 seconds per request
   - 8 * A100 GPU → <1 second per request, ~8 * 80 GB GPU memory
 ---
 
