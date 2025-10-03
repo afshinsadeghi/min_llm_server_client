@@ -48,6 +48,8 @@ Options:
     `Qwen/Qwen3-0.6B`
     `Qwen/Qwen2.5-72B-Instruct`
     `deepseek-ai/DeepSeek-R1-Distill-Qwen-32B`
+    `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`
+  
   
     or it can be local model with `/path/to/model`
 - `--max_new_tokens` : maximum number of tokens to generate in response.
