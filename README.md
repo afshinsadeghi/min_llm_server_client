@@ -39,7 +39,13 @@ min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 1
 ```
 
 Options:
-- `--model_name` : Hugging Face model name or local path (e.g. `openai/gpt-oss-20b`, `openai/gpt-oss-120b`, `meta-llama/Llama-3.3-70B-Instruct`, or local model `/path/to/model`).
+- `--model_name` : Hugging Face model name or local path
+   suggested models:
+    `openai/gpt-oss-20b`
+    `openai/gpt-oss-120b`
+    `meta-llama/Llama-3.3-70B-Instruct`
+    `meta-llama/Llama-3.1-8B`
+    or it can be local model with `/path/to/model`
 - `--max_new_tokens` : maximum number of tokens to generate in response.
 - `--device` : `cpu`, `cuda:0`, `cuda:1`, etc. if device is not given it finds available GPU core and uses them and if not available it uses CPU instead. 
 
