@@ -10,7 +10,7 @@ This package lets you start an inference server for Hugging Face–compatible mo
 See the [Tutorial](https://medium.com/@sadeghi.afshin/run-gpt-oss-20b-and-gpt-oss-120b-locally-with-a-minimal-api-server-in-the-style-of-openai-1872e68a93b7) page for extented info.
 ---
 
-## Installation by pip ![Pepy Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client)
+## Installation by pip ![PyPl Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client)
 
 From PyPI  (recommended):
 
@@ -46,10 +46,8 @@ Options:
     `meta-llama/Llama-3.3-70B-Instruct`
     `meta-llama/Llama-3.1-8B`
     `Qwen/Qwen3-0.6B`
-    `Qwen/Qwen2.5-72B-Instruct`
+    `Qwen/Qwen2-VL-72B-Instruct-AWQ`
     `deepseek-ai/DeepSeek-R1-Distill-Qwen-32B`
-    `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`
-  
   
     or it can be local model with `/path/to/model`
 - `--max_new_tokens` : maximum number of tokens to generate in response.
@@ -94,10 +92,7 @@ print(response)
 - Running **LLaMA 3.1 8B**:
   - Intel CPU → ~30 seconds per request, ~2.4 GB RAM
   - A100 GPU → <1 second per request, ~34 GB GPU memory, ~4.8 GB CPU RAM
-    
-- Running **Llama-3.3-70B-Instruct**:
-  - Intel CPU → ~120 seconds per request
-  - 8 * A100 GPU → <1 second per request, ~8 * 80 GB GPU memory
+
 ---
 
 ## Project Structure
@@ -115,13 +110,12 @@ min_llm_server_client/
 
 ## License
 
-This project is open source under the [Apache 2.0 License](./LICENSE).
+This project is open source under the [Apache 2.0 License](./LICENSE-2.0.txt).
 
 ---
 
 ## Author
-Afshin Sadeghi  
-📧 sadeghi.afshin@gmail.com  
+Afshin Sadeghi   
 🔗 [GitHub](https://github.com/afshinsadeghi)  
 🔗 [Google Scholar](https://scholar.google.com/citations?user=uWTszVEAAAAJ&hl=en&oi=ao)  
 🔗 [LinkedIn](https://www.linkedin.com/in/afshin-sadeghi)
