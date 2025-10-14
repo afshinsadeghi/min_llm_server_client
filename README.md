@@ -38,7 +38,7 @@ After installation, you can launch the server with the provided CLI entrypoint:
 min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device cuda:0
 ```
 
-Options:
+#### Options:
 - `--model_name` : Hugging Face model name or local path
    suggested models:
     `openai/gpt-oss-20b`
@@ -53,7 +53,7 @@ Options:
 - `--max_new_tokens` : maximum number of tokens to generate in response.
 - `--device` : `auto`, `cpu`, `cuda:0`, `cuda:1` , or a list of GPU cores: `cuda:2,3,4,5,6,7`. If the device parameter is not given or is `auto`, it finds the available GPU cores and uses them and if no gpu is available, it uses CPU instead. 
 
-Example run: 
+#### Example run: 
 ```bash
 min-llm-server 
 ```
@@ -61,7 +61,11 @@ To force it to run on CPU:
 ```bash
 min-llm-server --model_name openai/gpt-oss-20b --max_new_tokens 50 --device cpu
 ```
-
+To run a model `meta-llama/Llama-3.3-70B-Instruct` on specific GPU cores, for example: 2,3,4,5,6, and not to use cores 0 and 1:
+```bash
+min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --device =cuda:2,3,4,5,6,7
+Set CUDA_VISIBLE_DEVICES: =2,3,4,5,6,7
+```
 ---
 
 ### Sending Queries
