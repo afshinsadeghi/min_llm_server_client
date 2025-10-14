@@ -63,7 +63,7 @@ min-llm-server --model_name openai/gpt-oss-20b --max_new_tokens 50 --device cpu
 ```
 To run a model `meta-llama/Llama-3.3-70B-Instruct` on specific GPU cores, for example: 2,3,4,5,6, and not to use cores 0 and 1:
 ```bash
-min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --device =cuda:2,3,4,5,6,7
+min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --device cuda:2,3,4,5,6,7
 ```
 ---
 
