@@ -49,9 +49,9 @@ Options:
     `Qwen/Qwen2-VL-72B-Instruct-AWQ`
     `deepseek-ai/DeepSeek-R1-Distill-Qwen-32B`
   
-    or it can be local model with `/path/to/model`
+    or it can use a local model on your device with `/path/to/model`
 - `--max_new_tokens` : maximum number of tokens to generate in response.
-- `--device` : `auto`, `cpu`, `cuda:0`, `cuda:1`, etc. if device is not given or is auto, it finds available GPU core and uses them and if not available it uses CPU instead. 
+- `--device` : `auto`, `cpu`, `cuda:0`, `cuda:1` , or a list of GPU cores: `cuda:2,3,4,5,6,7`. If the device parameter is not given or is `auto`, it finds the available GPU cores and uses them and if no gpu is available, it uses CPU instead. 
 
 Example run: 
 ```bash
