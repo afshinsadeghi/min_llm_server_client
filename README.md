@@ -50,22 +50,7 @@ pip install min-llm-server-client
 pip install "min-llm-server-client[vllm]"
 ```
 
-#### Option 2: Interactive Installation 
-
-Clone the repository and run the interactive installer:
-
-```bash
-git clone https://github.com/afshinsadeghi/min_llm_server_client.git
-cd min_llm_server_client
-python install.py
-```
-
-The installer will ask you to choose between:
-1. **HuggingFace Transformers** (Standard) - Good for most users
-2. **vLLM Optimized** (High-Performance) - Best for production
-3. **Both** - Install both backends
-
-#### Option 3: Installation From Source:
+#### Option 2: Installation From Source:
 
 ```bash
 git clone https://github.com/afshinsadeghi/min_llm_server_client.git
