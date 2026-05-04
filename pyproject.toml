@@ -19,8 +19,14 @@ dependencies = [
   "pynvml"
 ]
 
+[project.optional-dependencies]
+vllm = [
+  "vllm>=0.3.0"
+]
+
 [project.scripts]
 min-llm-server = "min_llm_server_client.api_server:main"
+min-llm-server-vllm = "min_llm_server_client.api_server_vllm:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
