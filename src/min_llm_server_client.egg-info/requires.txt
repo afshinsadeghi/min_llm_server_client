@@ -4,3 +4,6 @@ torch
 flask
 sentencepiece
 pynvml
+
+[vllm]
+vllm>=0.3.0

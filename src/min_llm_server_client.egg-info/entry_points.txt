@@ -1,2 +1,3 @@
 [console_scripts]
 min-llm-server = min_llm_server_client.api_server:main
+min-llm-server-vllm = min_llm_server_client.api_server_vllm:main
