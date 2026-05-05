@@ -36,9 +36,8 @@ This package now supports two inference backends:
 
 ### Prerequisite
 ```bash
-uv venv
+uv venv --python==3.12
 source .venv/bin/activate
-uv python install 3.12
 ```
 
 **Standard light weight Installation (HuggingFace):**
