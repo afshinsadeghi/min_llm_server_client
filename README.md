@@ -100,7 +100,9 @@ uv run min-llm-server-vllm --model_name openai/gpt-oss-20b --max_new_tokens 100 
 - `--device` : Device selection 
   - `auto`  - Auto-detect available GPUs (default)
   - `cpu`,  - Force CPU (HuggingFace only, vLLM requires GPU)
-  -    `cuda:0`, `cuda:1` , or a list of GPU cores: `cuda:2,3,4,5,6,7`. 
+  -    `cuda:0`, `cuda:1` , or a list of GPU cores: `cuda:2,3,4,5,6,7`.
+
+- Specific to vLLM : `--max_model_len` : Maximum model context length. If not specified, will auto-detect from model config. Example: 8192
 
 If the device parameter is not given or is `auto`, it finds the available GPU cores and uses them and if no gpu is available, it uses CPU instead. 
 
