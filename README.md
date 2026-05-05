@@ -1,14 +1,12 @@
 
 
 
-# Minimal LLM Server, for API calls  
+# Minimal LLM Server, for API calls ![PyPl Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client)
 
 
-The simplest possible Python code for running local LLM inference as a REST API server (with a simple client).
+The simplest possible Python code for running local LLM inference as a REST API server and a simple client.
 
-This package lets you start an inference server for Hugging Face–compatible models (like LLaMA, Qwen, GPT-OSS, etc.) on your own computer or server, and make it accessible to applications via HTTP.
-
-**NEW:** Now supports both standard HuggingFace Transformers and high-performance vLLM backends!
+This package lets you start an inference server for Hugging Face–compatible models (like LLaMA, Qwen, GPT-OSS, etc.) on your own computer or server, and make it accessible to applications via HTTP.  It supports both standard HuggingFace Transformers and high-performance vLLM backends.
 
 See the [Tutorial](https://medium.com/@sadeghi.afshin/run-gpt-oss-20b-and-gpt-oss-120b-locally-with-a-minimal-api-server-in-the-style-of-openai-1872e68a93b7) page for extented info.
 ---
@@ -23,7 +21,7 @@ This package now supports two inference backends:
 - ✓ Smaller installation size
 - ✓ Good for development and testing
 
-### 2. **vLLM Optimized (High-Performance)** 🚀
+### 2. **vLLM Optimized (High-Performance)** 
 - ✓ Up to **24x faster** throughput than standard transformers
 - ✓ Lower latency for single requests
 - ✓ Better GPU memory utilization with PagedAttention
@@ -34,9 +32,7 @@ This package now supports two inference backends:
 
 ---
 
-## Installation
-
-## Installation by pip ![PyPl Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client)
+## Installation by pip 
 
 **Standard Installation (HuggingFace):**
 
@@ -50,7 +46,7 @@ pip install min-llm-server-client
 pip install "min-llm-server-client[vllm]"
 ```
 
-#### Option 2: Installation From Source:
+#### Installation From Source:
 
 ```bash
 git clone https://github.com/afshinsadeghi/min_llm_server_client.git
@@ -69,13 +65,13 @@ pip install ".[vllm]"
 
 ### Starting the Server
 
-#### Standard Server (HuggingFace Transformers)
+#### Standard HuggingFace Transformers Server
 
 ```bash
 min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device cuda:0
 ```
 
-#### #### vLLM Optimized Server (High-Performance) 🚀
+#### vLLM Optimized infernce Server 
 
 ```bash
 min-llm-server-vllm --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device auto
@@ -179,7 +175,7 @@ print(response)
 **Performance Tips:**
 - Use vLLM for production deployments with high request volumes
 - Use standard backend for development, testing, or CPU-only environments
-- vLLM automatically utilizes multiple GPUs with tensor parallelism
+- Both the deployement method based on Hugging face and vLLM automatically utilize multiple GPUs, vLLM with tensor parallelism
 - Both backends support the same API, making it easy to switch
 
 ---
