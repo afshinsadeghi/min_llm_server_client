@@ -1,35 +1,32 @@
 Metadata-Version: 2.4
 Name: min-llm-server-client
-Version: 0.3.10
-Summary: A minimal API server for local HuggingFace LLMs
-Author: Afshin Sadeghi
+Version: 0.4.1
+Summary: A minimal API server for local HuggingFace LLMs or VLLM LLMs
 Author-email: Afshin Sadeghi <sadeghi.afshin@gmail.com>
 License-Expression: Apache-2.0
-Requires-Python: >=3.6
+Requires-Python: ==3.12.*
 Description-Content-Type: text/markdown
 License-File: LICENSE-2.0.txt
+Requires-Dist: kernels
 Requires-Dist: transformers>=4.40.0
 Requires-Dist: accelerate>=0.28.0
-Requires-Dist: torch
+Requires-Dist: torch==2.10
 Requires-Dist: flask
 Requires-Dist: sentencepiece
-Requires-Dist: pynvml
+Requires-Dist: nvidia-ml-py
 Provides-Extra: vllm
 Requires-Dist: vllm>=0.3.0; extra == "vllm"
-Dynamic: author
 Dynamic: license-file
-Dynamic: requires-python
 
 
 
 
-# Minimal LLM Server, for API calls  
+# Minimal LLM Server, for API calls ![PyPl Total Downloads](https://img.shields.io/pepy/dt/min_llm_server_client)
 
-The simplest possible Python code for running local LLM inference as a REST API server (with a simple client).
 
-This package lets you start an inference server for Hugging Face–compatible models (like LLaMA, Qwen, GPT-OSS, etc.) on your own computer or server, and make it accessible to applications via HTTP.
+The simplest possible Python code for running local LLM inference as a REST API server and a simple client.
 
-**NEW:** Now supports both standard HuggingFace Transformers and high-performance vLLM backends!
+This package lets you start an inference server for Hugging Face–compatible models (like LLaMA, Qwen, GPT-OSS, etc.) on your own computer or server, and make it accessible to applications via HTTP.  It supports both standard HuggingFace Transformers and high-performance vLLM backends.
 
 See the [Tutorial](https://medium.com/@sadeghi.afshin/run-gpt-oss-20b-and-gpt-oss-120b-locally-with-a-minimal-api-server-in-the-style-of-openai-1872e68a93b7) page for extented info.
 ---
@@ -44,7 +41,7 @@ This package now supports two inference backends:
 - ✓ Smaller installation size
 - ✓ Good for development and testing
 
-### 2. **vLLM Optimized (High-Performance)** 🚀
+### 2. **vLLM Optimized (High-Performance)** 
 - ✓ Up to **24x faster** throughput than standard transformers
 - ✓ Lower latency for single requests
 - ✓ Better GPU memory utilization with PagedAttention
@@ -55,24 +52,14 @@ This package now supports two inference backends:
 
 ---
 
-## Installation
+## Installation by pip 
 
-### Option 1: Interactive Installation (Recommended)
-
-Clone the repository and run the interactive installer:
-
+### Prerequisite
 ```bash
-git clone https://github.com/afshinsadeghi/min_llm_server_client.git
-cd min_llm_server_client
-python install.py
+uv venv
+source .venv/bin/activate
+uv python install 3.12
 ```
-
-The installer will ask you to choose between:
-1. **HuggingFace Transformers** (Standard) - Good for most users
-2. **vLLM Optimized** (High-Performance) - Best for production
-3. **Both** - Install both backends
-
-### Option 2: Manual Installation
 
 **Standard Installation (HuggingFace):**
 
@@ -86,17 +73,17 @@ pip install min-llm-server-client
 pip install "min-llm-server-client[vllm]"
 ```
 
-**From Source:**
+#### Installation From Source:
 
 ```bash
 git clone https://github.com/afshinsadeghi/min_llm_server_client.git
 cd min_llm_server_client
 
 # Standard installation
-pip install .
+uv pip install .
 
 # Or with vLLM support
-pip install ".[vllm]"
+uv pip install ".[vllm]"
 ```
 
 ---
@@ -105,13 +92,13 @@ pip install ".[vllm]"
 
 ### Starting the Server
 
-#### Standard Server (HuggingFace Transformers)
+#### Standard HuggingFace Transformers Server
 
 ```bash
 min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device cuda:0
 ```
 
-#### vLLM Optimized Server (High-Performance) 🚀
+#### vLLM Optimized infernce Server 
 
 ```bash
 min-llm-server-vllm --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device auto
@@ -119,22 +106,26 @@ min-llm-server-vllm --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tok
 
 **Command Options:**
 - `--model_name` : Hugging Face model name or local path
-   - Suggested models:
-     - `openai/gpt-oss-20b`
-     - `openai/gpt-oss-120b`
-     - `meta-llama/Llama-3.3-70B-Instruct`
-     - `meta-llama/Llama-3.1-8B`
-     - `Qwen/Qwen3-0.6B`
-     - `Qwen/Qwen2-VL-72B-Instruct-AWQ`
-     - `deepseek-ai/DeepSeek-R1-Distill-Qwen-32B`
-   - Or use a local model path: `/path/to/model`
-- `--max_new_tokens` : Maximum number of tokens to generate in response
-- `--device` : Device selection
-  - `auto` - Auto-detect available GPUs (default)
-  - `cpu` - Force CPU (HuggingFace only, vLLM requires GPU)
-  - `cuda:0`, `cuda:1`, etc. - Specific GPU
+   suggested models:
+    `openai/gpt-oss-20b`
+    `openai/gpt-oss-120b`
+    `meta-llama/Llama-3.3-70B-Instruct`
+    `meta-llama/Llama-3.1-8B`
+    `Qwen/Qwen3-0.6B`
+    `Qwen/Qwen2-VL-72B-Instruct-AWQ`
+    `deepseek-ai/DeepSeek-R1-Distill-Qwen-32B`
+  
+    or it can use a local model on your device with `/path/to/model`.
 
-**Examples:**
+- `--max_new_tokens` : maximum number of tokens to generate in response.
+- `--device` : Device selection 
+  - `auto`  - Auto-detect available GPUs (default)
+  - `cpu`,  - Force CPU (HuggingFace only, vLLM requires GPU)
+  -    `cuda:0`, `cuda:1` , or a list of GPU cores: `cuda:2,3,4,5,6,7`. 
+
+If the device parameter is not given or is `auto`, it finds the available GPU cores and uses them and if no gpu is available, it uses CPU instead. 
+
+#### Example run: 
 
 Standard server with default settings (auto GPU detection):
 ```bash
@@ -166,6 +157,12 @@ vLLM server on a specific GPU (e.g., GPU 2):
 min-llm-server-vllm --model_name meta-llama/Llama-3.3-70B-Instruct --device cuda:2
 ```
 
+Standard server on a several GPUs:
+```bash
+
+min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --device cuda:2,3,4,5,6,7
+
+```
 ---
 
 ### Sending Queries
@@ -205,7 +202,7 @@ print(response)
 **Performance Tips:**
 - Use vLLM for production deployments with high request volumes
 - Use standard backend for development, testing, or CPU-only environments
-- vLLM automatically utilizes multiple GPUs with tensor parallelism
+- Both the deployement method based on Hugging face and vLLM automatically utilize multiple GPUs, vLLM with tensor parallelism
 - Both backends support the same API, making it easy to switch
 
 ---
@@ -225,13 +222,12 @@ min_llm_server_client/
 
 ## License
 
-This project is open source under the [Apache 2.0 License](./LICENSE).
+This project is open source under the [Apache 2.0 License](./LICENSE-2.0.txt).
 
 ---
 
 ## Author
-Afshin Sadeghi  
-📧 sadeghi.afshin@gmail.com  
+Afshin Sadeghi   
 🔗 [GitHub](https://github.com/afshinsadeghi)  
 🔗 [Google Scholar](https://scholar.google.com/citations?user=uWTszVEAAAAJ&hl=en&oi=ao)  
 🔗 [LinkedIn](https://www.linkedin.com/in/afshin-sadeghi)

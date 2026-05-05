@@ -50,7 +50,7 @@ class ModelRunner():
         # IMPORTANT:
         # - device_map="auto" enables sharding.
         # - max_memory forces the placer to spread across visible GPUs.
-        # - torch_dtype=bfloat16 (or float16) avoids fp32 OOM.
+        # - dtype=bfloat16 (or float16) avoids fp32 OOM.
         #device_map_ = None
         if setting.device != "auto" and setting.device != "cpu":
 
@@ -73,7 +73,7 @@ class ModelRunner():
         self.model = AutoModelForCausalLM.from_pretrained(
             setting.llm_path,
             device_map= "auto",
-            torch_dtype=torch.bfloat16,         # prefer bf16; use float16 if needed
+            dtype=torch.bfloat16,         # prefer bf16; use float16 if needed
             low_cpu_mem_usage=True
         )
 

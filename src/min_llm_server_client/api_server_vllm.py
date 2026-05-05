@@ -26,15 +26,22 @@ Important implementation notes:
 import os
 from flask import Flask, request, jsonify
 import argparse
-import torch
-import pynvml
 
 try:
     from vllm import LLM, SamplingParams
     VLLM_AVAILABLE = True
-except ImportError:
+    import torch
+    import pynvml
+except ImportError as e:
     VLLM_AVAILABLE = False
-    print("WARNING: vLLM is not installed. Please install it with: pip install vllm")
+    print(f"WARNING: vLLM or its dependencies are not installed. Error: {e}")
+    print("Please install it with: pip install vllm")
+    # Import torch and pynvml anyway for error handling
+    try:
+        import torch
+        import pynvml
+    except ImportError:
+        pass
 
 
 class VLLMModelRunner():

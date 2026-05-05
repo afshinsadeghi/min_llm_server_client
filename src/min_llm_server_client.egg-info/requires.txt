@@ -1,9 +1,10 @@
+kernels
 transformers>=4.40.0
 accelerate>=0.28.0
-torch
+torch==2.10
 flask
 sentencepiece
-pynvml
+nvidia-ml-py
 
 [vllm]
 vllm>=0.3.0

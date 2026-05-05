@@ -34,16 +34,23 @@ This package now supports two inference backends:
 
 ## Installation by pip 
 
-**Standard Installation (HuggingFace):**
+### Prerequisite
+```bash
+uv venv
+source .venv/bin/activate
+uv python install 3.12
+```
+
+**Standard light weight Installation (HuggingFace):**
 
 ```bash
-pip install min-llm-server-client
+uv pip install min-llm-server-client
 ```
 
 **With vLLM Support:**
 
 ```bash
-pip install "min-llm-server-client[vllm]"
+uv pip install "min-llm-server-client[vllm]"
 ```
 
 #### Installation From Source:
@@ -53,10 +60,10 @@ git clone https://github.com/afshinsadeghi/min_llm_server_client.git
 cd min_llm_server_client
 
 # Standard installation
-pip install .
+uv pip install .
 
 # Or with vLLM support
-pip install ".[vllm]"
+uv pip install ".[vllm]"
 ```
 
 ---
@@ -74,7 +81,7 @@ min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 1
 #### vLLM Optimized infernce Server 
 
 ```bash
-min-llm-server-vllm --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device auto
+min-llm-server-vllm --model_name openai/gpt-oss-20b --max_new_tokens 100 --device cuda:2
 ```
 
 **Command Options:**

@@ -1,7 +1,9 @@
 LICENSE-2.0.txt
+MANIFEST.in
 README.md
 pyproject.toml
-setup.py
+src/__init__.py
+src/local_llm_inference_api_client.py
 src/min_llm_server_client/__init__.py
 src/min_llm_server_client/api_server.py
 src/min_llm_server_client/api_server_vllm.py

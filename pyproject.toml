@@ -4,19 +4,20 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "min-llm-server-client"
-version = "0.4.0"  # bump each release
+version = "0.4.1"  # bump each release
 description = "A minimal API server for local HuggingFace LLMs or VLLM LLMs"
 readme = "README.md"
-requires-python = ">=3.12"
-license = {file = "LICENSE-2.0.txt"}
+requires-python = "==3.12.*"
+license = "Apache-2.0"
 authors = [{ name = "Afshin Sadeghi", email = "sadeghi.afshin@gmail.com" }]
 dependencies = [
+  "kernels",
   "transformers>=4.40.0",
   "accelerate>=0.28.0",
-  "torch",
+  "torch==2.10",
   "flask",
   "sentencepiece",
-  "pynvml"
+  "nvidia-ml-py"
 ]
 
 [project.optional-dependencies]
