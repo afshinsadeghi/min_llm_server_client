@@ -65,6 +65,7 @@ class VLLMModelRunner():
             )
         
         self.max_new_tokens = setting.max_new_tokens
+        self.max_model_len = setting.max_model_len
         
         # Configure GPU visibility if specific device is requested
         if setting.device != "auto" and setting.device != "cpu":
@@ -102,7 +103,7 @@ class VLLMModelRunner():
             tensor_parallel_size=tensor_parallel_size,
             dtype="bfloat16",  # Use bfloat16 for better performance
             trust_remote_code=True,
-            max_model_len=None,  # Auto-detect based on model config
+            max_model_len=self.max_model_len,  # Use user-specified value or None for auto-detect
             gpu_memory_utilization=0.90,  # Use 90% of GPU memory for KV cache
         )
         
@@ -233,12 +234,20 @@ def main():
         help="Device selection: 'auto' (auto-detect GPUs), 'cuda:0', 'cuda:1', etc. "
              "Note: vLLM requires CUDA GPUs and does not support CPU inference"
     )
+    parser.add_argument(
+        "--max_model_len",
+        default=None,
+        type=int,
+        help="Maximum model context length. If not specified, will auto-detect from model config. "
+             "Examples: 4096, 8192, 16384, 32768"
+    )
     args = parser.parse_args()
     
     setting.key = args.key
     setting.llm_path = args.model_name
     setting.max_new_tokens = args.max_new_tokens
     setting.device = args.device
+    setting.max_model_len = args.max_model_len
     
     global llm_runner
     llm_runner = VLLMModelRunner(setting)
