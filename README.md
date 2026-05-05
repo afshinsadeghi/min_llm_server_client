@@ -74,13 +74,13 @@ uv pip install ".[vllm]"
 #### Standard HuggingFace Transformers Server
 
 ```bash
-min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device cuda:0
+uv run min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device cuda:0
 ```
 
 #### vLLM Optimized infernce Server 
 
 ```bash
-min-llm-server-vllm --model_name openai/gpt-oss-20b --max_new_tokens 100 --device cuda:2
+uv run min-llm-server-vllm --model_name openai/gpt-oss-20b --max_new_tokens 100 --device cuda:2
 ```
 
 **Command Options:**
