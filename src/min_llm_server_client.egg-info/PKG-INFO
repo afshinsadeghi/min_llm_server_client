@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: min-llm-server-client
-Version: 0.4.1
+Version: 0.4.3
 Summary: A minimal API server for local HuggingFace LLMs or VLLM LLMs
 Author-email: Afshin Sadeghi <sadeghi.afshin@gmail.com>
 License-Expression: Apache-2.0
@@ -56,21 +56,20 @@ This package now supports two inference backends:
 
 ### Prerequisite
 ```bash
-uv venv
+uv venv --python 3.12
 source .venv/bin/activate
-uv python install 3.12
 ```
 
-**Standard Installation (HuggingFace):**
+**Standard light weight Installation (HuggingFace):**
 
 ```bash
-pip install min-llm-server-client
+uv pip install min-llm-server-client
 ```
 
 **With vLLM Support:**
 
 ```bash
-pip install "min-llm-server-client[vllm]"
+uv pip install "min-llm-server-client[vllm]"
 ```
 
 #### Installation From Source:
@@ -95,13 +94,13 @@ uv pip install ".[vllm]"
 #### Standard HuggingFace Transformers Server
 
 ```bash
-min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device cuda:0
+uv run min-llm-server --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device cuda:0
 ```
 
 #### vLLM Optimized infernce Server 
 
 ```bash
-min-llm-server-vllm --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tokens 100 --device auto
+uv run min-llm-server-vllm --model_name openai/gpt-oss-20b --max_new_tokens 100 --device cuda:2
 ```
 
 **Command Options:**
@@ -121,7 +120,9 @@ min-llm-server-vllm --model_name meta-llama/Llama-3.3-70B-Instruct --max_new_tok
 - `--device` : Device selection 
   - `auto`  - Auto-detect available GPUs (default)
   - `cpu`,  - Force CPU (HuggingFace only, vLLM requires GPU)
-  -    `cuda:0`, `cuda:1` , or a list of GPU cores: `cuda:2,3,4,5,6,7`. 
+  -    `cuda:0`, `cuda:1` , or a list of GPU cores: `cuda:2,3,4,5,6,7`.
+
+- Specific to vLLM : `--max_model_len` : Maximum model context length. If not specified, will auto-detect from model config. Example: 8192
 
 If the device parameter is not given or is `auto`, it finds the available GPU cores and uses them and if no gpu is available, it uses CPU instead. 
 
