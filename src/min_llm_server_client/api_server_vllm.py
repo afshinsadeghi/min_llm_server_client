@@ -72,7 +72,8 @@ class VLLMModelRunner():
             dev_str = setting.device.replace("cuda:", "")
             os.environ["CUDA_VISIBLE_DEVICES"] = dev_str
             print(f"Set CUDA_VISIBLE_DEVICES: {os.environ['CUDA_VISIBLE_DEVICES']}")
-            tensor_parallel_size = 1
+            # Count the number of GPUs specified (e.g., "2,3,4,5,6,7" = 6 GPUs)
+            tensor_parallel_size = len(dev_str.split(","))
         else:
             # Auto-detect GPUs with sufficient memory
             gpus = self.pick_gpus(min_free_gib=50)
