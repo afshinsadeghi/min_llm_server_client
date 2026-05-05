@@ -1,8 +1,6 @@
 # Include important files in the distribution
 include README.md
 include LICENSE-2.0.txt
-include requirements.txt
-include install.py
 include pyproject.toml
 
 # Include all Python files in src
