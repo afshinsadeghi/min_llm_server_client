@@ -30,6 +30,11 @@ This package now supports two inference backends:
 - ⚠ Requires CUDA GPUs (no CPU support)
 - ⚠ Best for production deployments
 
+In comparison to the original vLLM min_llm_server_client:
+- ✓ Automatic GPU selection based on free VRAM
+- ✓ Auto-configured multi-GPU tensor parallelism
+- ✓ Ultra-lightweight API with minimal setup and dependencies, allows just setup and run with minimal or no configuration
+- ✓ Easier to customize and integrate into research or internal AI pipelines in research clusters.
 ---
 
 ## Installation by pip 
